@@ -18,8 +18,8 @@ RUN apt-get update \
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY index.php /usr/share/nginx/html/index.php
 
-CMD service nginx start
+CMD ["nginx", "-g", "daemon off;"]
 
-WORKDIR /home
+WORKDIR /
 
 EXPOSE 80
