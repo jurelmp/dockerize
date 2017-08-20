@@ -7,7 +7,7 @@ services:
       dockerfile: php.dockerfile
     volumes:
       - ./:/var/www
-    depends_on:
+    links:
       - db
     environment:
       - "DB_PORT=3306"
@@ -21,12 +21,13 @@ services:
       - app
     ports:
       - "8080:80"
-    depends_on:
-      - db
+    links:
+      - app
 
   db:
     image: mysql:5.6
     volumes:
+    # The mysql from the container will be mounted to host machine
       - "./.data/db:/var/lib/mysql"
     environment:
       - "MYSQL_ROOT_PASSWORD=root"
